@@ -1,62 +1,55 @@
-<?php    
-
-   include "connection.php"; 
-   include "listing.php";
-
-while($row = mysqli_fetch_object($result)){    
-    
-    
-?>  
-    <tr>  
-        <td>  
-            <?php echo $row->id;?>  
-        </td>  
-        <td>  
-            <?php echo $row->fname;?>  
-        </td>  
-        <td>  
-            <?php echo $row->mname;?>  
-        </td>  
-        <td>  
-            <?php echo $row->lname;?>  
-        </td>  
-        <td>  
-            <?php echo $row->pwd;?>  
-        </td>  
-        <td>  
-            <?php echo $row->cnf;?>  
-        </td>  
-        <td>  
-            <?php echo $row->mail;?>  
-        </td>  
-        <td>  
-            <?php echo $row->number;?>  
-        </td>  
-        <td>G  
-            <?php echo $row->sex;?>  
-        </td>  
-        <td>  
-            <?php echo $row->address;?>  
-        </td>  
-        <td>  
-            <?php echo $row->code;?>  
-        </td>  
-        <td>  
-            <?php echo $row->city;?>  
-        </td>  
-        <td>  
-            <?php echo $row->country;?>  
-        </td>  
-        <td>  
-            <?php echo $row->skills;?>  
-        </td>  
-        <td>  
-            <?php echo $row->attach_file;?>  
-        </td>  
-        <td> <a href="listing.php?id =     
-            <?php echo $row->id;?>" onclick="return confirm('Are You Sure')">Delete    
-        </a> | <a href="index.php?id =     
-            <?php echo $row->id;?>" onclick="return confirm('Are You Sure')">Edit    
-        </a> </td>  
-        <tr>  
-            <?php } ?> 
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>Insert Page page</title>
+</head>
+ 
+<body>
+    <center>
+        <?php
+ 
+        // servername => localhost
+        // username => root
+        // password => empty
+        // database name => staff
+        $conn = mysqli_connect("localhost", "root", "", "staff");
+         
+        // Check connection
+        if($conn === false){
+            die("ERROR: Could not connect. "
+                . mysqli_connect_error());
+        }
+         
+        // Taking all 5 values from the form data(input)
+        $fname =  $_REQUEST['fname'];
+        $mname =  $_REQUEST['mname'];
+        $lname = $_REQUEST['lname'];
+        $sex =  $_REQUEST['sex'];
+        $pwd =  $_REQUEST['pwd'];
+        $mail = $_REQUEST['mail'];
+         
+        // Performing insert query execution
+        // here our table name is college
+        $sql = "INSERT INTO college  VALUES ('$fname','$mname',
+            '$lname','$sex','$pwd','$mail')";
+         
+        if(mysqli_query($conn, $sql)){
+            echo "<h3>data stored in a database successfully."
+                . " Please browse your localhost php my admin"
+                . " to view the updated data</h3>";
+ 
+            echo nl2br("\n$fname\n $mname\n  $lname\n "
+                . "$sex\n $pwd\n $mail");
+        } else{
+            echo "ERROR: Hush! Sorry $sql. "
+                . mysqli_error($conn);
+        }
+         
+        // Close connection
+        mysqli_close($conn);
+        ?>
+    </center>
+</body>
+ 
+</html>
