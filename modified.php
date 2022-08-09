@@ -21,7 +21,7 @@
                 . mysqli_connect_error());
         }
          
-        // Taking all 5 values from the form data(input)
+        // Taking all 6 values from the form data(input)
         $fname =  $_REQUEST['fname'];
         $mname =  $_REQUEST['mname'];
         $lname = $_REQUEST['lname'];
